@@ -273,6 +273,9 @@ msg.TheRank = 'عضو مميز '
 msg.Rank = 7
 elseif msg.sender_user_id_ == our_id then
 msg.Rank = 8
+elseif msg.GroupActive and redis:sismember(max..'scam:'..msg.chat_id_,msg.sender_user_id_) then 
+msg.TheRank = 'عضو نصاب '
+msg.Rank = 9
 else
 msg.TheRank = 'فقط عضو '
 msg.Rank = 11
@@ -308,6 +311,10 @@ end
 
 if msg.Rank == 8 then
 msg.OurBot = true
+end
+
+if msg.Rank == 9 then
+msg.Special = true
 end
 
 ISONEBOT = false
@@ -472,15 +479,15 @@ function tdcli_update_callback(data)
 	UpdateSourceStart = false
 	EditMsg(data.message_.chat_id_,data.message_.id_,'10% - |█          |')
 	EditMsg(data.message_.chat_id_,data.message_.id_,'20% - |███         |')
-	download_file('https://raw.githubusercontent.com/foza817/fawazmunshi/master/inc/Run.lua','./inc/Run.lua')
+	download_file('https://raw.githubusercontent.com/foza817/fawaz817/master/inc/Run.lua','./inc/Run.lua')
 	EditMsg(data.message_.chat_id_,data.message_.id_,'40% - |█████       |')
-	download_file('https://raw.githubusercontent.com/foza817/fawazmunshi/master/inc/locks.lua','./inc/locks.lua')
+	download_file('https://raw.githubusercontent.com/foza817/fawaz817/master/inc/locks.lua','./inc/locks.lua')
 	EditMsg(data.message_.chat_id_,data.message_.id_,'60% - |███████     |')
-	download_file('https://raw.githubusercontent.com/foza817/fawazmunshi/master/inc/Script.lua','./inc/Script.lua')
+	download_file('https://raw.githubusercontent.com/foza817/fawaz817/master/inc/Script.lua','./inc/Script.lua')
 	EditMsg(data.message_.chat_id_,data.message_.id_,'80% - |█████████   |')
-	download_file('https://raw.githubusercontent.com/foza817/fawazmunshi/master/inc/functions.lua','./inc/functions.lua')
-	download_file('https://raw.githubusercontent.com/foza817/fawazmunshi/master/plugins/zhrfa.lua','./plugins/zhrfa.lua')
-	download_file('https://raw.githubusercontent.com/foza817/fawazmunshi/master/plugins/games.lua','./plugins/games.lua')
+	download_file('https://raw.githubusercontent.com/foza817/fawaz817/master/inc/functions.lua','./inc/functions.lua')
+	download_file('https://raw.githubusercontent.com/foza817/fawaz817/master/plugins/zhrfa.lua','./plugins/zhrfa.lua')
+	download_file('https://raw.githubusercontent.com/foza817/fawaz817/master/plugins/games.lua','./plugins/games.lua')
 	EditMsg(data.message_.chat_id_,data.message_.id_,'100% - |█████████████|\n\n🔝*¦* السورس الى اصدار \n📟*¦* تم اعاده تشغيل السورس بنجاح')
 	dofile("./inc/Run.lua")
 	print("Update Source And Reload ~ ./inc/Run.lua")
@@ -516,12 +523,12 @@ end
 	end)
 	end 
 	if msg.text== 'Update Source' and msg.sender_user_id_ == SUDO_ID then
-	download_file('https://raw.githubusercontent.com/foza817/fawazmunshi/master/inc/Run.lua','./inc/Run.lua')
-	download_file('https://raw.githubusercontent.com/foza817/fawazmunshi/master/inc/Script.lua','./inc/Script.lua')
-	download_file('https://raw.githubusercontent.com/foza817/fawazmunshi/master/inc/functions.lua','./inc/functions.lua')
-	download_file('https://raw.githubusercontent.com/foza817/fawazmunshi/master/inc/locks.lua','./inc/locks.lua')
-	download_file('https://raw.githubusercontent.com/foza817/fawazmunshi/master/plugins/zhrfa.lua','./plugins/zhrfa.lua')
-	download_file('https://raw.githubusercontent.com/foza817/fawazmunshi/master/plugins/games.lua','./plugins/games.lua')
+	download_file('https://raw.githubusercontent.com/foza817/fawaz817/master/inc/Run.lua','./inc/Run.lua')
+	download_file('https://raw.githubusercontent.com/foza817/fawaz817/master/inc/Script.lua','./inc/Script.lua')
+	download_file('https://raw.githubusercontent.com/foza817/fawaz817/master/inc/functions.lua','./inc/functions.lua')
+	download_file('https://raw.githubusercontent.com/foza817/fawaz817/master/inc/locks.lua','./inc/locks.lua')
+	download_file('https://raw.githubusercontent.com/foza817/fawaz817/master/plugins/zhrfa.lua','./plugins/zhrfa.lua')
+	download_file('https://raw.githubusercontent.com/foza817/fawaz817/master/plugins/games.lua','./plugins/games.lua')
 	sendMsg(msg.chat_id_,msg.id_,'👷🏽| {* تــم تحديث وتثبيت السورس  *} 📡.\n\n💼| { Bot is Update » }👍🏿',nil,function(arg,data)
 	dofile("./inc/Run.lua")
 	print("Reload ~ ./inc/Run.lua")
@@ -678,7 +685,7 @@ end
 	if redis:get(max..'group:add-100'..data.channel_.id_) then
 	local linkGroup = (redis:get(max..'linkGroup-100'..data.channel_.id_) or "")
 	local NameGroup = (redis:get(max..'group:name-100'..data.channel_.id_) or "")
-	send_msg(SUDO_ID,"📛┇قام شخص بطرد البوت من المجموعه الاتيه : \n🏷┇ألايدي : `-100"..data.channel_.id_.."`\n🗯┇الـمجموعه : "..Flter_Markdown(NameGroup).."\n\n📮┇تـم مسح كل بيانات المجموعه بنـجاح ")
+	send_msg(SUDO_ID,"📛┇قام شخص بطرد البوت من المجموعه الاتيه : \n🏷┇الايدي : `-100"..data.channel_.id_.."`\n🗯┇الـمجموعه : "..Flter_Markdown(NameGroup).."\n\n📮┇تـم مسح كل بيانات المجموعه بنـجاح ")
 	rem_data_group('-100'..data.channel_.id_)
 	end
 	end
