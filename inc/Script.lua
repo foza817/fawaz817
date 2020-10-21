@@ -137,7 +137,7 @@ end
 
 local function imax(msg,MsgText)
 if msg.type ~= 'pv' then
-
+end
 if MsgText[1] == "تفعيل" and not MsgText[2] then
 redis:set(max.."getidstatus"..msg.chat_id_, "Photo")
 redis:set(max..'lock:kara:'..msg.chat_id_,'off')
