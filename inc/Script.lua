@@ -322,7 +322,7 @@ send_msg(msg.chat_id_,t,msg.id_)
 end,nil)
 end
 
-if MsgText[1] == "نذار" then 
+if MsgText[1] == "انذار" then 
 if not msg.Admin then return "📛*│* هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n🚶" end
 return ownerlist(msg) .. GetListAdmin(msg) .. whitelist(msg)
 end
