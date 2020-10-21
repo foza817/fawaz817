@@ -170,64 +170,6 @@ end
 
 
 
-if MsgText[1] == 'الاشتراك' and MsgText[2] then 
-if not msg.SudoUser then return "♦️*│*هذا الامر يخص {المطور} فقط  \n💥" end
-if MsgText[2] == '1' then
-redis:setex(max..'ExpireDate:'..msg.chat_id_, 2592000, true)
-if not redis:get(max..'CheckExpire::'..msg.chat_id_) then 
-redis:set(max..'CheckExpire::'..msg.chat_id_,true) 
-end
-sendMsg(msg.chat_id_,msg.id_,'💂🏻‍♀️│تم تفعيل الاشتراك   👍🏿\n📆│ الاشتراك » `30 يوم`  *(شهر)*')
-sendMsg(SUDO_ID,0,'💂🏻‍♀️│تم تفعيل الاشتراك  👍🏿\n📆│ الاشتراك » `30 يوم`  *(شهر)*')
-end
-if MsgText[2] == '2' then
-redis:setex(max..'ExpireDate:'..msg.chat_id_,7776000,true)
-if not redis:get(max..'CheckExpire::'..msg.chat_id_) then 
-redis:set(max..'CheckExpire::'..msg.chat_id_,true) 
-end
-sendMsg(msg.chat_id_,msg.id_,'💂🏻‍♀️│تم تفعيل الاشتراك   👍🏿\n📆│ الاشتراك » `90 يوم`  *(3 اشهر)*')
-sendMsg(SUDO_ID,0,'💂🏻‍♀️│تم تفعيل الاشتراك   👍🏿\n📆│ الاشتراك » `90 يوم`  *(3 اشهر)*')
-end
-if MsgText[2] == '3' then
-redis:set(max..'ExpireDate:'..msg.chat_id_,true)
-if not redis:get(max..'CheckExpire::'..msg.chat_id_) then 
-redis:set(max..'CheckExpire::'..msg.chat_id_,true) end
-sendMsg(msg.chat_id_,msg.id_,'💂🏻‍♀️│تم تفعيل الاشتراك   👍🏿\n📆│ الاشتراك » `مفتوح`  *(مدى الحياة)*')
-sendMsg(SUDO_ID,0,'💂🏻‍♀️│تم تفعيل الاشتراك   👍🏿\n📆│ الاشتراك » `مفتوح`  *(مدى الحياة)*')
-end 
-return false
-end
-
-
-if MsgText[1] == 'الاشتراك' and not MsgText[2] and msg.Admin then
-if not msg.Admin then return "♦️*│*هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n💥" end
-local check_time = redis:ttl(max..'ExpireDate:'..msg.chat_id_)
-if check_time < 0 then return '*مـفـتـوح *🎖\n✓' end
-year = math.floor(check_time / 31536000)
-byear = check_time % 31536000 
-month = math.floor(byear / 2592000)
-bmonth = byear % 2592000 
-day = math.floor(bmonth / 86400)
-bday = bmonth % 86400 
-hours = math.floor( bday / 3600)
-bhours = bday % 3600 
-min = math.floor(bhours / 60)
-sec = math.floor(bhours % 60)
-if tonumber(check_time) > 1 and check_time < 60 then
-remained_expire = '💳│`باقي من الاشتراك ` » » * \n 📆│ '..sec..'* ثانيه'
-elseif tonumber(check_time) > 60 and check_time < 3600 then
-remained_expire = '💳│`باقي من الاشتراك ` » » '..min..' *دقيقه و * *'..sec..'* ثانيه'
-elseif tonumber(check_time) > 3600 and tonumber(check_time) < 86400 then
-remained_expire = '💳│`باقي من الاشتراك ` » » * \n 📆│ '..hours..'* ساعه و *'..min..'* دقيقه و *'..sec..'* ثانيه'
-elseif tonumber(check_time) > 86400 and tonumber(check_time) < 2592000 then
-remained_expire = '💳│`باقي من الاشتراك ` » » * \n 📆│ '..day..'* يوم و *'..hours..'* ساعه و *'..min..'* دقيقه و *'..sec..'* ثانيه'
-elseif tonumber(check_time) > 2592000 and tonumber(check_time) < 31536000 then
-remained_expire = '💳│`باقي من الاشتراك ` » » * \n 📆│ '..month..'* شهر و *'..day..'* يوم و *'..hours..'* ساعه و *'..min..'* دقيقه و *'..sec..'* ثانيه'
-elseif tonumber(check_time) > 31536000 then
-remained_expire = '💳│`باقي من الاشتراك ` » » * \n 📆│ '..year..'* سنه و *'..month..'* شهر و *'..day..'* يوم و *'..hours..'* ساعه و *'..min..'* دقيقه و *'..sec..'* ثانيه' end
-return remained_expire
-end
-
 
 if MsgText[1] == "المجموعه" then
 if not msg.Admin then return "♦️*│*هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n💥" end
