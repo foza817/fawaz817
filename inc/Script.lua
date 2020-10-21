@@ -169,8 +169,6 @@ end
 end
 
 
-if msg.type ~= 'pv' and msg.GroupActive then
-
 if MsgText[1] == 'شحن' and MsgText[2] then
 if not msg.SudoUser then return "♦️*│*هذا الامر يخص {المطور} فقط  \n💥" end
 if tonumber(MsgText[2]) > 0 and tonumber(MsgText[2]) < 1001 then
