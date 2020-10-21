@@ -169,20 +169,6 @@ end
 end
 
 
-if MsgText[1] == 'شحن' and MsgText[2] then
-if not msg.SudoUser then return "♦️*│*هذا الامر يخص {المطور} فقط  \n💥" end
-if tonumber(MsgText[2]) > 0 and tonumber(MsgText[2]) < 1001 then
-local extime = (tonumber(MsgText[2]) * 86400)
-redis:setex(max..'ExpireDate:'..msg.chat_id_, extime, true)
-if not redis:get(max..'CheckExpire::'..msg.chat_id_) then 
-redis:set(max..'CheckExpire::'..msg.chat_id_,true) end
-sendMsg(msg.chat_id_,msg.id_,'💂🏻‍♀️│تم شحن الاشتراك الى `'..MsgText[2]..'` يوم   ... 👍🏿')
-sendMsg(SUDO_ID,0,'💂🏻‍♀️│تم شحن الاشتراك الى `'..MsgText[2]..'` يوم   ... 👍🏿\n🕵🏼️‍♀️│في مجموعه  » »  '..redis:get(max..'group:name'..msg.chat_id_))
-else
-sendMsg(msg.chat_id_,msg.id_,'💂🏻‍♀️│عزيزي المطور ✋🏿\n👨🏻‍🔧│شحن الاشتراك يكون ما بين يوم الى 1000 يوم فقط 🍃')
-end 
-return false
-end
 
 if MsgText[1] == 'الاشتراك' and MsgText[2] then 
 if not msg.SudoUser then return "♦️*│*هذا الامر يخص {المطور} فقط  \n💥" end
