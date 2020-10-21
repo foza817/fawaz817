@@ -171,6 +171,7 @@ end
 
 
 
+
 if MsgText[1] == "المجموعه" then
 if not msg.Admin then return "♦️*│*هذا الامر يخص {الادمن,المدير,المنشئ,المطور} فقط  \n💥" end
 GetFullChat(msg.chat_id_,function(arg,data)
